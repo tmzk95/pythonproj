@@ -5,33 +5,32 @@ from django import template
 from django.contrib.auth import authenticate,login
 from django.views.generic import View
 from .forms import UserForm
+from django.http import HttpResponse
+from .models import Restauracja,Recenzja
+from django.template import loader
+
+def restaurantindex(request):
+    all_restaurants= Restauracja.objects.all()
+    template= loader.get_template('restaurantindex.html')
+    context= {
+        'all_restaurants':all_restaurants,
+    }
+
+    return HttpResponse(template.render(context,request))
 
 def index(request):
     return render_to_response('index.html')
+def backup(request):
+    return render_to_response('backup.html')
 def test(request):
     return render_to_response('login.html')
+def restaurantdetailed(request,restauracja_id):
+    restaurant = Restauracja.objects.get(id=restauracja_id)
+    reviews = Recenzja.objects.filter(restauracja_id=restauracja_id)
+    template = loader.get_template('restaurantdetail.html')
+    context = {
+        'restaurant': restaurant,
+        'reviews' : reviews,
+    }
 
-class UserFormView(View):
-    form_class=UserForm
-    template_name='registration.html'
-
-    def get(self,request):
-        form=self.form_class(None)
-        return render(request, self.template_name, {'form':form})
-    def post(self,request):
-        form=self.form_class(request.POST)
-
-        if form.is_valid():
-            user=form.save(commit=False)
-            username = form.cleaned_data('username')
-            password = form.cleaned_data('password')
-            user.user=request.user
-            user.save()
-            user=authenticate(username=username,password=password)
-
-            if user.is_active:
-                login(request,user)
-                return redirect('index')
-
-        return render(request, self.template_name, {'form': form})
-
+    return HttpResponse(template.render(context, request))

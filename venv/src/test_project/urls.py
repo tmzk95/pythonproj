@@ -24,7 +24,10 @@ urlpatterns = [
     url(r'^$', views.index),
     url(r'^login/',auth_views.login),
     url(r'^logout/',auth_views.logout),
-    url(r'^registration/',views.UserFormView.as_view())
+    url(r'^restaurant/$',views.restaurantindex),
+    url(r'^restaurant/(?P<restauracja_id>[0-9a-z]+)$',views.restaurantdetailed,name='detailed'),
+    url(r'^backup/', views.backup)
+
 ]
 
 urlpatterns+= staticfiles_urlpatterns()
