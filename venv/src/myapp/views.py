@@ -34,3 +34,6 @@ def restaurantdetailed(request,restauracja_id):
     }
 
     return HttpResponse(template.render(context, request))
+class UserFormView(View):
+    form_class = UserForm
+    template_name = 'registration.html'
