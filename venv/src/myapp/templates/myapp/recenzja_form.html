@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+
+{% block content %}
+<center>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-7">
+            <div class="panel-body">
+                <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    {% include 'form_template.html' %}
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-success">Wyślij</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</center>
+{% endblock content %}

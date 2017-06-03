@@ -8,9 +8,10 @@ from .forms import UserForm
 from django.http import HttpResponse
 from .models import Restauracja,Recenzja
 from django.template import loader
+from django.views.generic.edit import CreateView,UpdateView,DeleteView
 
 def restaurantindex(request):
-    all_restaurants= Restauracja.objects.all()
+    all_restaurants= Restauracja.objects.filter(aktywna=True)
     template= loader.get_template('restaurantindex.html')
     context= {
         'all_restaurants':all_restaurants,
@@ -20,10 +21,12 @@ def restaurantindex(request):
 
 def index(request):
     return render_to_response('index.html')
+def redirect(request):
+    return render_to_response('redirect.html')
 def backup(request):
     return render_to_response('backup.html')
 def test(request):
-    return render_to_response('login.html')
+    return render_to_response('base.html')
 def restaurantdetailed(request,restauracja_id):
     restaurant = Restauracja.objects.get(id=restauracja_id)
     reviews = Recenzja.objects.filter(restauracja_id=restauracja_id)
@@ -34,6 +37,13 @@ def restaurantdetailed(request,restauracja_id):
     }
 
     return HttpResponse(template.render(context, request))
+
+class RecenzjaStworz(CreateView):
+    model = Recenzja
+    fields = ['opis','ocena','restauracja','uzytkownik']
+
+
+
 class UserFormView(View):
     form_class = UserForm
     template_name = 'registration.html'

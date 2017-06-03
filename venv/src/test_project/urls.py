@@ -21,13 +21,14 @@ from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^$', views.index),
+    url(r'^$', views.index, name='index'),
     url(r'^login/',auth_views.login),
+    url(r'^redirect/',views.redirect),
     url(r'^logout/',auth_views.logout),
     url(r'^restaurant/$',views.restaurantindex),
     url(r'^restaurant/(?P<restauracja_id>[0-9a-z]+)$',views.restaurantdetailed,name='detailed'),
-    url(r'^backup/', views.backup)
-
+    url(r'^backup/', views.backup),
+    url(r'^recenzja/add', views.RecenzjaStworz.as_view(), name='recenzja-add'),
 ]
 
 urlpatterns+= staticfiles_urlpatterns()
