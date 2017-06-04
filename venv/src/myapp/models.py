@@ -13,12 +13,12 @@ class Restauracja(models.Model):
 
     @property
     def ocena(self):
-        recs = Recenzja.objects.filter(restauracja=self.id)
-        t = 0
-        for rec in recs:
-            t += rec.ocena
-        t = t / recs.__len__()
-        return "%.1f" %t
+        reviews = Recenzja.objects.filter(restauracja=self.id)
+        rate = 0
+        for review in reviews:
+            rate += review.ocena
+        rate = rate / reviews.__len__()
+        return "%.1f" %rate
 
     def __str__(self):
         return self.nazwa
