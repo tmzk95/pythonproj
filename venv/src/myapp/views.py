@@ -30,6 +30,8 @@ def index(request):
         return render_to_response('index.html')
 def redirect(request):
     return render_to_response('redirect.html')
+def team(request):
+    return render_to_response('team.html')
 def backup(request):
     return render_to_response('backup.html')
 def test(request):

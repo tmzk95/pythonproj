@@ -29,6 +29,7 @@ urlpatterns = [
     url(r'^backup/', views.backup),
     url(r'^recenzja/add', views.RecenzjaStworz.as_view(), name='recenzja-add'),
     url(r'^register/', views.UserFormView.as_view(), name='register'),
+    url(r'^team/', views.team, name='team'),
     url(r'^logout/$', auth_views.logout, {'next_page': 'redirect'}),
 ]
 
