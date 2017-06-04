@@ -39,7 +39,7 @@ def test(request):
     return render_to_response('base.html')
 def restaurantdetailed(request,restauracja_id):
     restaurant = Restauracja.objects.get(id=restauracja_id)
-    reviews = Recenzja.objects.filter(restauracja_id=restauracja_id)
+    reviews = Recenzja.objects.filter(restauracja_id=restauracja_id).order_by('-created')
     template = loader.get_template('restaurantdetail.html')
     context = {
         'restaurant': restaurant,

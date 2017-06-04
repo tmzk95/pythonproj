@@ -20,7 +20,7 @@ class Restauracja(models.Model):
             rate += review.ocena
         if reviews.__len__() != 0:
             rate = rate / reviews.__len__()
-        return "%.1f" %rate
+        return "%.1f" % rate
 
     def __str__(self):
         return self.nazwa
@@ -33,6 +33,7 @@ class Recenzja(models.Model):
     ocena = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(10.0)])
     restauracja = models.ForeignKey(Restauracja, on_delete=models.CASCADE)
     uzytkownik = models.ForeignKey(User, on_delete=models.CASCADE)
+    created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
         return self.opis
