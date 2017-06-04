@@ -9,6 +9,7 @@ from django.http import HttpResponse
 from .models import Restauracja,Recenzja
 from django.template import loader
 from django.views.generic.edit import CreateView,UpdateView,DeleteView
+from django.shortcuts import get_object_or_404
 
 def restaurantindex(request):
     all_restaurants= Restauracja.objects.filter(aktywna=True)
@@ -51,6 +52,11 @@ class RecenzjaStworz(CreateView):
     model = Recenzja
     fields = ['opis','ocena','restauracja','uzytkownik']
 
+    def get_initial(self):
+        initials = super(RecenzjaStworz, self).get_initial()
+        if self.kwargs['restauracja_id'] is not None:
+            initials['restauracja'] = self.kwargs['restauracja_id']
+        return initials
 
 
 class UserFormView(View):

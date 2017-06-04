@@ -27,7 +27,7 @@ urlpatterns = [
     url(r'^restaurant/$',views.restaurantindex),
     url(r'^restaurant/(?P<restauracja_id>[0-9a-z]+)$',views.restaurantdetailed,name='detailed'),
     url(r'^backup/', views.backup),
-    url(r'^recenzja/add', views.RecenzjaStworz.as_view(), name='recenzja-add'),
+    url(r'^recenzja/add/(?P<restauracja_id>[0-9a-z]*)$', views.RecenzjaStworz.as_view(), name='recenzja-add'),
     url(r'^register/', views.UserFormView.as_view(), name='register'),
     url(r'^team/', views.team, name='team'),
     url(r'^logout/$', auth_views.logout, {'next_page': 'redirect'}),
