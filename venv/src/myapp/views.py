@@ -44,6 +44,7 @@ def restaurantdetailed(request,restauracja_id):
     context = {
         'restaurant': restaurant,
         'reviews' : reviews,
+        'user':request.user.username,
     }
 
     return HttpResponse(template.render(context, request))
