@@ -50,13 +50,18 @@ def restaurantdetailed(request,restauracja_id):
 
 class RecenzjaStworz(CreateView):
     model = Recenzja
-    fields = ['opis','ocena','restauracja','uzytkownik']
+    fields = ['opis','ocena','restauracja']
 
     def get_initial(self):
         initials = super(RecenzjaStworz, self).get_initial()
         if self.kwargs['restauracja_id'] is not None:
             initials['restauracja'] = self.kwargs['restauracja_id']
         return initials
+
+    def form_valid(self, form):
+        user = self.request.user
+        form.instance.uzytkownik = user
+        return super(RecenzjaStworz, self).form_valid(form)
 
 
 class UserFormView(View):

@@ -26,6 +26,8 @@ class Restauracja(models.Model):
         return self.nazwa
 
 
+
+
 class Recenzja(models.Model):
     opis= models.CharField(max_length=1500)
     ocena = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(10.0)])
