@@ -38,7 +38,7 @@ class Recenzja(models.Model):
     def __str__(self):
         return self.opis
     def get_absolute_url(self):
-        return reverse('redirect')
+        return '/restaurant/' + str(self.restauracja.id)
 
 
 
