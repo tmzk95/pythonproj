@@ -9,8 +9,16 @@ class Restauracja(models.Model):
     nazwa = models.CharField(max_length=200)
     zdjecie= models.CharField(max_length=300)
     opis = models.CharField(max_length=200)
-    ocena = models.FloatField()
     aktywna = models.BooleanField(default=False)
+
+    @property
+    def ocena(self):
+        recs = Recenzja.objects.filter(restauracja=self.id)
+        t = 0
+        for rec in recs:
+            t += rec.ocena
+        t = t / recs.__len__()
+        return "%.1f" %t
 
     def __str__(self):
         return self.nazwa
