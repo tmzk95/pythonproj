@@ -13,7 +13,9 @@
                 <div class="intro-lead-in">Witaj w LubFood!</div>
                 {% endif %}
                 <div class="intro-heading">Miło nam że nas odwiedziłeś :)</div>
-                {% if not user %}
+                {% if user %}
+                    <a href="recenzja/add" class="page-scroll btn btn-xl">Dodaj Recenzję</a>
+                {% else %}
                     <a href="register" class="page-scroll btn btn-xl">Zarejestruj się</a>
                 {% endif %}
             </div>
