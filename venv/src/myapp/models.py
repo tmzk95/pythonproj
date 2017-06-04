@@ -18,7 +18,8 @@ class Restauracja(models.Model):
         rate = 0
         for review in reviews:
             rate += review.ocena
-        rate = rate / reviews.__len__()
+        if reviews.__len__() != 0:
+            rate = rate / reviews.__len__()
         return "%.1f" %rate
 
     def __str__(self):
