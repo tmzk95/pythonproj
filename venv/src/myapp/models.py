@@ -4,6 +4,7 @@ from django.contrib.auth.models import User
 from django import forms
 from django.core.urlresolvers import reverse
 from django.shortcuts import render, render_to_response, redirect
+from django.core.validators import MaxValueValidator, MinValueValidator
 
 class Restauracja(models.Model):
     nazwa = models.CharField(max_length=200)
@@ -26,7 +27,7 @@ class Restauracja(models.Model):
 
 class Recenzja(models.Model):
     opis= models.CharField(max_length=1500)
-    ocena= models.FloatField()
+    ocena = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(10.0)])
     restauracja = models.ForeignKey(Restauracja, on_delete=models.CASCADE)
     uzytkownik = models.ForeignKey(User, on_delete=models.CASCADE)
 
