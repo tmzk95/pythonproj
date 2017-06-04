@@ -1,12 +1,32 @@
 {% extends 'base.html' %}
-
-{% block title %}Login{% endblock %}
+{% load staticfiles %}
 
 {% block content %}
-  <h2>Login</h2>
-  <form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Login</button>
-  </form>
-{% endblock %}
+<center>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-sm-12 col-md-7">
+            <div class="panel-body">
+                <form class="form-horizontal" action="" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    <br>
+                    {% include 'form_template.html' %}
+                    {% if form.errors %}
+        <p>{{form.errors}}</p>
+                     {% endif %}
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <button type="submit" class="btn btn-success">Wyślij</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</center>
+{% endblock content %}

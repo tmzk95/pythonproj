@@ -52,20 +52,31 @@
                         <a href="#page-top"></a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#services">O stronie</a>
+                        <a class="page-scroll" href="/#services">O stronie</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="restaurant">Restauracje</a>
+                        <a class="page-scroll" href="/restaurant">Restauracje</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#about">Ostatnie recenzje</a>
+                        <a class="page-scroll" href="/#about">Ostatnie recenzje</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#team">Twórcy</a>
+                        <a class="page-scroll" href="/#team">Twórcy</a>
                     </li>
                     <li>
-                        <a class="page-scroll" href="#contact">Kontakt</a>
+                        <a class="page-scroll" href="/#contact">Kontakt</a>
                     </li>
+                    {% if not user %}
+                    <li>
+                        <a class="page-scroll" href="/login">Zaloguj</a>
+                    </li>
+                    {% endif %}
+                    {% if user %}
+                    <li>
+                        <a class="page-scroll" href="/logout">Wyloguj</a>
+                    </li>
+                    {% endif %}
+
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

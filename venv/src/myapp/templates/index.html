@@ -2,14 +2,20 @@
 {% load staticfiles %}
 {% block content %}
 
-
     <!-- Header -->
     <header>
         <div class="container">
             <div class="intro-text">
+                {% if user %}
+                <div class="intro-lead-in">Witaj {{ user }} !!!</p></div>
+                {% endif %}
+                {% if not user %}
                 <div class="intro-lead-in">Witaj w LubFood!</div>
+                {% endif %}
                 <div class="intro-heading">Miło nam że nas odwiedziłeś :)</div>
-                <a href="register" class="page-scroll btn btn-xl">Zarejestruj się</a>
+                {% if not user %}
+                    <a href="register" class="page-scroll btn btn-xl">Zarejestruj się</a>
+                {% endif %}
             </div>
         </div>
     </header>

@@ -25,7 +25,7 @@ class Recenzja(models.Model):
     def __str__(self):
         return self.opis
     def get_absolute_url(self):
-        return reverse('index')
+        return reverse('redirect')
 
 
 
