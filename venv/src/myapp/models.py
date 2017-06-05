@@ -25,9 +25,11 @@ class Restauracja(models.Model):
     @property
     def stars_orange(self):
         ocenaInt = int(float(self.ocena))
-        stars = 'a'
+        stars = 'o'
         for star in range(1, ocenaInt):
-            stars += 'a'
+            stars += 'o'
+        for star in range(ocenaInt, 6):
+            stars += 'e'
         return stars
 
     def __str__(self):

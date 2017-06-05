@@ -27,7 +27,12 @@
                         <h4>{{ restaurant.nazwa }}</h4>
                         <div class="stars_container">
                             {% for star in restaurant.stars_orange %}
-                                <div class="star_orange"></div>
+                                {% if star == 'o' %}
+                                    <div class="star star_orange"></div>
+                                {% endif %}
+                                {% if star == 'e' %}
+                                    <div class="star star_empty"></div>
+                                {% endif %}
                             {% endfor %}
                         </div>
                         <div style="clear:both"></div>

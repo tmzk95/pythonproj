@@ -2,14 +2,21 @@
     background-color: rgba(20,20,20,0.9);
 }
 
-.star_orange{
+.star{
     float: left;
     width: 29px;
     height: 28px;
-    color: red;
     margin: 5px;
-    background-image: url('../img/star_orange.png');
     background-size: 100% 100%;
+}
+
+.star_orange{
+    background-image: url('../img/star_orange.png');
+
+}
+
+.star_empty{
+    background-image: url('../img/star_empty.png');
 
 }
 
