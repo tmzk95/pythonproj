@@ -25,8 +25,8 @@ class Restauracja(models.Model):
     @property
     def stars_orange(self):
         ocenaInt = int(float(self.ocena))
-        stars = 'o'
-        for star in range(1, ocenaInt):
+        stars = ''
+        for star in range(0, ocenaInt):
             stars += 'o'
         for star in range(ocenaInt, 5):
             stars += 'e'
@@ -50,7 +50,7 @@ class Restauracja(models.Model):
 
 class Recenzja(models.Model):
     opis= models.CharField(max_length=1500)
-    ocena = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(10.0)])
+    ocena = models.FloatField(validators=[MinValueValidator(0.0), MaxValueValidator(5.0)])
     restauracja = models.ForeignKey(Restauracja, on_delete=models.CASCADE)
     uzytkownik = models.ForeignKey(User, on_delete=models.CASCADE)
     created = models.DateTimeField(auto_now_add=True)
