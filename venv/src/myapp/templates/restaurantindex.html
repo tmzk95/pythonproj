@@ -40,7 +40,7 @@
                         <div class="text-muted">Tagi :</div>
                         {% for tagtorestaurant in all_tags %}
                             {% if tagtorestaurant.restauracja.id == restaurant.id %}
-                            <a href="#"> {{tagtorestaurant.tag.name}}</a>
+                            <a href="/restaurant/{{tagtorestaurant.tag.name}}"> {{tagtorestaurant.tag.name}}</a>
                             {% endif %}
                         {% endfor %}
                     </div>
