@@ -28,7 +28,7 @@ class Restauracja(models.Model):
         stars = 'o'
         for star in range(1, ocenaInt):
             stars += 'o'
-        for star in range(ocenaInt, 6):
+        for star in range(ocenaInt, 5):
             stars += 'e'
         return stars
 
