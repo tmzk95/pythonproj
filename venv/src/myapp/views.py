@@ -6,20 +6,35 @@ from django.contrib.auth import authenticate,login,logout
 from django.views.generic import View
 from .forms import UserForm
 from django.http import HttpResponse
-from .models import Restauracja,Recenzja
+from .models import Restauracja,Recenzja,Tag,TagToRestaurant
 from django.template import loader
 from django.views.generic.edit import CreateView,UpdateView,DeleteView
 from django.shortcuts import get_object_or_404
 
 def restaurantindex(request):
     all_restaurants= Restauracja.objects.filter(aktywna=True)
+    all_tags=TagToRestaurant.objects.all()
     template= loader.get_template('restaurantindex.html')
     context= {
         'all_restaurants':all_restaurants,
+        'all_tags':all_tags,
+
     }
 
     return HttpResponse(template.render(context,request))
 
+def restaurantbytag(request,tag_name):
+    tagstorestaurants= TagToRestaurant.objects.filter(tag=Tag.objects.get(name=tag_name))
+    all_restaurants=[]
+    all_tags = Tag.objects.all()
+    template = loader.get_template('restaurantindex.html')
+    for tagtorestaurant in tagstorestaurants:
+        all_restaurants.append(tagtorestaurant.restauracja)
+    context= {
+        'all_restaurants':all_restaurants,
+        'all_tags':all_tags,
+    }
+    return HttpResponse(template.render(context, request))
 def index(request):
     template= loader.get_template('index.html')
     if request.user.is_authenticated():

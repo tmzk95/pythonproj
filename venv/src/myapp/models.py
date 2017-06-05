@@ -35,6 +35,16 @@ class Restauracja(models.Model):
     def __str__(self):
         return self.nazwa
 
+    @property
+    def tags(self):
+        tagi=""
+        tagslist= TagToRestaurant.objects.filter(restauracja=self.id)
+        for tagtorestaurant in tagslist:
+            tagi+=tagtorestaurant.tag.name
+        return tagi
+
+
+
 
 
 
@@ -50,5 +60,16 @@ class Recenzja(models.Model):
     def get_absolute_url(self):
         return '/restaurant/' + str(self.restauracja.id)
 
+class Tag(models.Model):
+    name = models.CharField(max_length=100)
 
+    def __str__(self):
+        return self.name
 
+class TagToRestaurant(models.Model):
+    restauracja=models.ForeignKey(Restauracja, on_delete=models.CASCADE)
+    tag=models.ForeignKey(Tag, on_delete=models.CASCADE)
+
+    @property
+    def name(self):
+        return self.tag.name
