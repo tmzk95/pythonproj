@@ -13,6 +13,13 @@
                     <br>
                     <br>
                     <h2 class="section-heading">{{ restaurant.nazwa }}</h2>
+                    <div class="stars_container">
+                        {% for star in restaurant.stars_orange %}
+                            <div class="star_orange"></div>
+                        {% endfor %}
+                    </div>
+                    <div style="clear:both"></div>
+                    <div class="text-muted">Ocena: {{restaurant.ocena}}</div>
                     <h3 class="section-subheading text-muted">{{ restaurant.opis }}</h3>
                     {% if user %}
                         <a href="/recenzja/add/{{ restaurant.id }}" class="page-scroll btn btn-xl" style="margin-bottom: 70px">Zrecenzuj {{user}}!</a>
@@ -31,7 +38,7 @@
                             </span>
                             <h4 class="service-heading">{{ review.uzytkownik }}</h4>
                             <p class="text-muted">{{review.opis}}</p>
-                            <h4 class="service-heading">Ocena - {{ review.ocena }}</h4>
+                            <h4 class="service-heading">Ocena: {{ review.ocena }}</h4>
                         </div>
                         <div class="col-md-2">
                         </div>

@@ -22,6 +22,14 @@ class Restauracja(models.Model):
             rate = rate / reviews.__len__()
         return "%.1f" % rate
 
+    @property
+    def stars_orange(self):
+        ocenaInt = int(float(self.ocena))
+        stars = 'a'
+        for star in range(1, ocenaInt):
+            stars += 'a'
+        return stars
+
     def __str__(self):
         return self.nazwa
 

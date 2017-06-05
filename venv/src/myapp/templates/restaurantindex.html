@@ -24,12 +24,19 @@
                         <img src="{% static restaurant.zdjecie %}" class="img-responsive" alt="">
                     </a>
                     <div class="portfolio-caption">
-                        <h4>{{restaurant.nazwa}}</h4>
-                        <p class="text-muted">{{restaurant.ocena}}</p>
+                        <h4>{{ restaurant.nazwa }}</h4>
+                        <div class="stars_container">
+                            {% for star in restaurant.stars_orange %}
+                                <div class="star_orange"></div>
+                            {% endfor %}
+                        </div>
+                        <div style="clear:both"></div>
+                        <div class="text-muted">Ocena: {{restaurant.ocena}}</div>
                     </div>
                 </div>
                 {% endfor %}
             </div>
+
         </div>
     </section>
 {% else %}

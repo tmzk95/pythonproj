@@ -1,3 +1,19 @@
 .black{
     background-color: rgba(20,20,20,0.9);
 }
+
+.star_orange{
+    float: left;
+    width: 29px;
+    height: 28px;
+    color: red;
+    margin: 5px;
+    background-image: url('../img/star_orange.png');
+    background-size: 100% 100%;
+
+}
+
+.stars_container{
+display: inline-block;
+    margin: 0 auto;
+}
