@@ -26,7 +26,7 @@ def restaurantindex(request):
 def restaurantbytag(request,tag_name):
     tagstorestaurants= TagToRestaurant.objects.filter(tag=Tag.objects.get(name=tag_name))
     all_restaurants=[]
-    all_tags = Tag.objects.all()
+    all_tags = TagToRestaurant.objects.all()
     template = loader.get_template('restaurantindex.html')
     for tagtorestaurant in tagstorestaurants:
         all_restaurants.append(tagtorestaurant.restauracja)
