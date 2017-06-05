@@ -37,7 +37,7 @@
                         </div>
                         <div style="clear:both"></div>
                         <div class="text-muted">Ocena: {{restaurant.ocena}}</div>
-                        <div class="text-muted">Tagi :</div>
+                        <span class="text-muted">Tagi:</span>
                         {% for tagtorestaurant in all_tags %}
                             {% if tagtorestaurant.restauracja.id == restaurant.id %}
                             <a href="/restaurant/{{tagtorestaurant.tag.name}}"> {{tagtorestaurant.tag.name}}</a>
