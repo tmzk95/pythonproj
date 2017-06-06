@@ -35,6 +35,11 @@
                         </div>
                     </div>
                 {% endfor %}
+
+                {% for page in pages %}
+                    <a href="../reviews/{{page}}" class="page-scroll btn btn-xl">{{page}}</a>
+
+                {% endfor %}
             </div>
 
 

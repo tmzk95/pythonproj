@@ -67,7 +67,7 @@
                     <li>
                         <a class="page-scroll" href="/#contact">Kontakt</a>
                     </li>
-                    {% if user.is_authenticated %}
+                    {% if user %}
                     <li>
                         <a class="page-scroll" href="/logout">Wyloguj</a>
                     </li>
@@ -75,7 +75,7 @@
                     <li>
                         <a class="page-scroll" href="/login">Zaloguj</a>
                     </li>
-                    {% endif%}
+                    {% endif %}
                 </ul>
             </div>
             <!-- /.navbar-collapse -->

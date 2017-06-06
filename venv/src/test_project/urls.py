@@ -19,13 +19,14 @@ from myapp import views
 from django.contrib.staticfiles.urls import staticfiles_urlpatterns
 from django.contrib.auth import views as auth_views
 
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', views.index, name='index'),
     url(r'^login/$',auth_views.login, name='login'),
     url(r'^redirect/',views.redirect, name='redirect'),
     url(r'^restaurant/$',views.restaurantindex),
-    url(r'^reviews/$', views.reviews),
+    url(r'^reviews/$', views.reviews2),
     url(r'^restaurant/(?P<restauracja_id>[0-9]+)$',views.restaurantdetailed,name='detailed'),
     url(r'^restaurant/(?P<tag_name>[a-z]+)$',views.restaurantbytag,name='taged'),
     url(r'^backup/', views.backup),
@@ -33,6 +34,7 @@ urlpatterns = [
     url(r'^register/', views.UserFormView.as_view(), name='register'),
     url(r'^team/', views.team, name='team'),
     url(r'^logout/$', auth_views.logout, {'next_page': 'redirect'}),
+    url(r'^reviews/(?P<page>[0-9]+)$', views.reviews),
 ]
 
 urlpatterns+= staticfiles_urlpatterns()

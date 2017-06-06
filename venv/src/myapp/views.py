@@ -21,18 +21,37 @@ def restaurantindex(request):
 
     }
 
+    if request.user.is_authenticated():
+        context ['user'] = request.user.username
+
     return HttpResponse(template.render(context,request))
 
-def reviews(request):
-    reviewsList = Recenzja.objects.filter().order_by('-id')[:5]
+def reviews(request, page):
+    if page != None:
+        reviewsList = Recenzja.objects.filter().order_by('-created')[5*int(page)-5:5*int(page)]
+    else:
+        reviewsList = Recenzja.objects.filter().order_by('-created')[0:5]
     template = loader.get_template('reviews.html')
 
+    reviewsNumber = Recenzja.objects.all().count()
+
+    pages =""
+
+    for i in range(1, int(reviewsNumber/5 )+2):
+        pages += str(i)
+
+
+
     context = {
-        'reviews': reviewsList
+        'reviews': reviewsList,
+        'pages' : pages,
     }
 
     return HttpResponse(template.render(context, request))
 
+def reviews2(request):
+    httpResp = reviews(request, None)
+    return httpResp
 
 def restaurantbytag(request,tag_name):
     tagstorestaurants= TagToRestaurant.objects.filter(tag=Tag.objects.get(name=tag_name))
@@ -48,9 +67,10 @@ def restaurantbytag(request,tag_name):
     return HttpResponse(template.render(context, request))
 def index(request):
     template= loader.get_template('index.html')
+
     if request.user.is_authenticated():
-        context={
-            'user':request.user.username,
+        context = {
+            'user': request.user.username,
         }
         return HttpResponse(template.render(context, request))
     else:
@@ -109,7 +129,7 @@ class UserFormView(View):
 
             user = authenticate(request,username=username,password=password)
 
-            if user is not None:
+            if user != None:
 
                 if user.is_active:
                     login(request, user)
