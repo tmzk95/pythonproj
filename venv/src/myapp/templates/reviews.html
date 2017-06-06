@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% load staticfiles %}
+{% block content %}
+
+{% if reviews %}
+    <!-- Portfolio Grid Section -->
+    <section id="portfolio" class="bg-light-gray">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h2 class="section-heading">Ostatnie recenzje naszych użytkowników</h2>
+                    <h3 class="section-subheading text-muted">Poznaj najnowsze opinie o znanych Ci miejscach!</h3>
+                </div>
+            </div>
+        </div>
+            </div>
+            <div class="row text-center">
+                {% for review in reviews %}
+                    <div class="col-md-12" style="padding-bottom:50px">
+                        <div class="col-md-2">
+                        </div>
+                        <div class="col-md-8">
+                            <h1>{{review.restauracja.nazwa}}</h1>
+                            <span class="img-responsive">
+                                <img src="{% static review.restauracja.zdjecie %}" class="img-responsive" alt="" style="margin:auto">
+                            </span>
+                            <h3 class="service-heading">Użytkownik: {{ review.uzytkownik }}</h3>
+                            <p class="text-muted"><q>{{review.opis}}</q></p>
+                            <h4 class="service-heading">Ocena: {{ review.ocena }}</h4>
+                            {%if user %}
+                               <a href="review/add" class="page-scroll btn btn-xl">Dodaj recenzję</a>
+                            {%endif%}
+                        </div>
+                        <div class="col-md-2">
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+
+
+        </div>
+    </section>
+{% else %}
+<section>
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-12 text-center">
+                    <h1 class="section-heading">Niestety, nikt nie dodał jeszcze recenzji...</h>
+                    <h4 class="section-subheading text-muted">Mamy nadzieję, że pomożesz nam to zmienić :) </h4>
+                    <br />
+                    <a href="review/add" class="page-scroll btn btn-xl">Dodaj recenzję</a>
+                    <h2 class="section-subheading text-muted">lub</h2>
+                    <a href="../" class="page-scroll btn btn-xl">Wróć do strony głównej</a>
+                </div>
+            </div>
+{% endif %}
+
+{% endblock content %}

@@ -25,6 +25,7 @@ urlpatterns = [
     url(r'^login/$',auth_views.login, name='login'),
     url(r'^redirect/',views.redirect, name='redirect'),
     url(r'^restaurant/$',views.restaurantindex),
+    url(r'^reviews/$', views.reviews),
     url(r'^restaurant/(?P<restauracja_id>[0-9]+)$',views.restaurantdetailed,name='detailed'),
     url(r'^restaurant/(?P<tag_name>[a-z]+)$',views.restaurantbytag,name='taged'),
     url(r'^backup/', views.backup),

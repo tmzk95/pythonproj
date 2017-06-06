@@ -23,6 +23,17 @@ def restaurantindex(request):
 
     return HttpResponse(template.render(context,request))
 
+def reviews(request):
+    reviewsList = Recenzja.objects.filter().order_by('-id')[:5]
+    template = loader.get_template('reviews.html')
+
+    context = {
+        'reviews': reviewsList
+    }
+
+    return HttpResponse(template.render(context, request))
+
+
 def restaurantbytag(request,tag_name):
     tagstorestaurants= TagToRestaurant.objects.filter(tag=Tag.objects.get(name=tag_name))
     all_restaurants=[]
