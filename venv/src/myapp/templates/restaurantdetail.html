@@ -7,6 +7,9 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
+                    {% if not restaurant.aktywna %}
+                        <div class="warn-red">Wkrótce zweryfikujemy i dodamy tę restaurację</div>
+                    {% endif %}
                     <img src="{% static restaurant.zdjecie %}" class="img-responsive" alt="" style="margin:auto">
                     <br>
                     <br>
@@ -26,7 +29,7 @@
                     <div style="clear:both"></div>
                     <div class="text-muted">Ocena: {{restaurant.ocena}}</div>
                     <h3 class="section-subheading text-muted">{{ restaurant.opis }}</h3>
-                    {% if user %}
+                    {% if user and restaurant.aktywna %}
                         <a href="/recenzja/add/{{ restaurant.id }}" class="page-scroll btn btn-xl" style="margin-bottom: 70px">Zrecenzuj {{user}}!</a>
                     {% endif %}
                 </div>

@@ -11,6 +11,7 @@ class Restauracja(models.Model):
     zdjecie= models.CharField(max_length=300)
     opis = models.CharField(max_length=200)
     aktywna = models.BooleanField(default=False)
+    uzytkownik = models.ForeignKey(User, on_delete=models.CASCADE)
 
     @property
     def ocena(self):
@@ -35,6 +36,9 @@ class Restauracja(models.Model):
     def __str__(self):
         return self.nazwa
 
+    def get_absolute_url(self):
+        return '/restaurant/' + str(self.id)
+
     @property
     def tags(self):
         tagi=""
@@ -57,14 +61,17 @@ class Recenzja(models.Model):
 
     def __str__(self):
         return self.opis
+
     def get_absolute_url(self):
         return '/restaurant/' + str(self.restauracja.id)
+
 
 class Tag(models.Model):
     name = models.CharField(max_length=100)
 
     def __str__(self):
         return self.name
+
 
 class TagToRestaurant(models.Model):
     restauracja=models.ForeignKey(Restauracja, on_delete=models.CASCADE)

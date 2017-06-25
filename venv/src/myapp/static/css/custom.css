@@ -28,3 +28,8 @@ a {
 display: inline-block;
     margin: 0 auto;
 }
+
+.warn-red{
+    color: red;
+    font-size: 24px;
+}

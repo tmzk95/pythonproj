@@ -13,7 +13,7 @@
                 </div>
             </div>
         </div>
-            </div>
+        <div>
             <div class="row text-center">
                 {% for review in reviews %}
                     <div class="col-md-12" style="padding-bottom:50px">
@@ -27,9 +27,6 @@
                             <h3 class="service-heading">Użytkownik: {{ review.uzytkownik }}</h3>
                             <p class="text-muted"><q>{{review.opis}}</q></p>
                             <h4 class="service-heading">Ocena: {{ review.ocena }}</h4>
-                            {%if user %}
-                               <a href="../recenzja/add" class="page-scroll btn btn-xl">Dodaj recenzję</a>
-                            {%endif%}
                         </div>
                         <div class="col-md-2">
                         </div>

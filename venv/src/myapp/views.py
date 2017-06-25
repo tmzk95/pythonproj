@@ -11,6 +11,7 @@ from django.template import loader
 from django.views.generic.edit import CreateView,UpdateView,DeleteView
 from django.shortcuts import get_object_or_404
 
+
 def restaurantindex(request):
     all_restaurants= Restauracja.objects.filter(aktywna=True)
     all_tags=TagToRestaurant.objects.all()
@@ -25,6 +26,7 @@ def restaurantindex(request):
         context ['user'] = request.user.username
 
     return HttpResponse(template.render(context,request))
+
 
 def reviews(request, page):
     if page != None:
@@ -49,9 +51,11 @@ def reviews(request, page):
 
     return HttpResponse(template.render(context, request))
 
+
 def reviews2(request):
     httpResp = reviews(request, None)
     return httpResp
+
 
 def restaurantbytag(request,tag_name):
     tagstorestaurants= TagToRestaurant.objects.filter(tag=Tag.objects.get(name=tag_name))
@@ -65,6 +69,8 @@ def restaurantbytag(request,tag_name):
         'all_tags':all_tags,
     }
     return HttpResponse(template.render(context, request))
+
+
 def index(request):
     template= loader.get_template('index.html')
 
@@ -75,14 +81,24 @@ def index(request):
         return HttpResponse(template.render(context, request))
     else:
         return render_to_response('index.html')
+
+
 def redirect(request):
     return render_to_response('redirect.html')
+
+
 def team(request):
     return render_to_response('team.html')
+
+
 def backup(request):
     return render_to_response('backup.html')
+
+
 def test(request):
     return render_to_response('base.html')
+
+
 def restaurantdetailed(request,restauracja_id):
     restaurant = Restauracja.objects.get(id=restauracja_id)
     reviews = Recenzja.objects.filter(restauracja_id=restauracja_id).order_by('-created')
@@ -94,6 +110,7 @@ def restaurantdetailed(request,restauracja_id):
     }
 
     return HttpResponse(template.render(context, request))
+
 
 class RecenzjaStworz(CreateView):
     model = Recenzja
@@ -111,6 +128,17 @@ class RecenzjaStworz(CreateView):
         return super(RecenzjaStworz, self).form_valid(form)
 
 
+class RestauracjaStworz(CreateView):
+    model = Restauracja
+    fields = ['nazwa','opis']
+
+    def form_valid(self, form):
+        user = self.request.user
+        form.instance.uzytkownik = user
+        form.instance.aktywna = False
+        return super(RestauracjaStworz, self).form_valid(form)
+
+
 class UserFormView(View):
     form_class = UserForm
     template_name = 'registration.html'
@@ -118,6 +146,7 @@ class UserFormView(View):
     def get(self,request):
         form=self.form_class(None)
         return render(request,self.template_name, {'form':form})
+
     def post(self,request):
         form=self.form_class(request.POST)
         if form.is_valid():
